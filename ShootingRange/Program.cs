@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NationalInstruments.Visa;
+using Ivi.Visa;
 
 namespace ShootingRange
 {
@@ -16,6 +18,9 @@ namespace ShootingRange
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Form1());
+			ResourceManager rm = new ResourceManager();
+
+			foreach (string str in rm.Find("?*")) Console.WriteLine(str);
 		}
 	}
 }
