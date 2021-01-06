@@ -19,7 +19,7 @@ namespace ShootingRange
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Form1());
 
-			foreach (string str in DaqSystem.Local.GetPhysicalChannels(PhysicalChannelTypes.AI, PhysicalChannelAccess.External)) Console.WriteLine(str);
+			
 		}
 	}
 }
