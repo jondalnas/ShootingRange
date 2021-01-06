@@ -12,6 +12,7 @@ namespace ShootingRange
 {
 	public partial class Form1 : Form {
 		public byte dist, currDist;
+		public bool fast;
 		public Form1() {
 			InitializeComponent();
 			progressBar1.Maximum = 90*15;
@@ -111,6 +112,10 @@ namespace ShootingRange
 		}
 
 		private void label3_Click(object sender, EventArgs e) {
+
+		}
+
+		private void trackBar1_Scroll(object sender, EventArgs e) {
 
 		}
 
