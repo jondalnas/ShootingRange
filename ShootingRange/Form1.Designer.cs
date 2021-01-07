@@ -14,6 +14,8 @@
 				components.Dispose();
 			}
 			base.Dispose(disposing);
+
+			NIController.Dispose();
 		}
 
 		#region Windows Form Designer generated code

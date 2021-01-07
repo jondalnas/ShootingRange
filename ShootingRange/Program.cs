@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NationalInstruments.DAQmx;
-using Ivi.Visa;
 
 namespace ShootingRange {
 	static class Program {
@@ -13,11 +12,11 @@ namespace ShootingRange {
 		/// </summary>
 		[STAThread]
 		static void Main() {
+			NIController.InitializeInstrument();
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Form1());
-
-			
 		}
 	}
 }
