@@ -31,33 +31,48 @@ namespace ShootingRange {
 		}
 
 		public static void SetMotorControl(double voltage) {
-			//TODO: Add WriteVoltage(double) method
+			WriteAnalog(motorControlTask, voltage);
 		}
 
 		public static double GetMotorLoad() {
-			return ReadVoltage(motorLoadTask);
+			return ReadAnalog(motorLoadTask);
 		}
 
 		public static byte GetRotations() {
-			return ReadData(motorRotationsTask);
+			return ReadDigital(motorRotationsTask);
 		}
 
-		private static double ReadVoltage(Task task) {
+		private static double ReadAnalog(Task task) {
 			AnalogSingleChannelReader reader = new AnalogSingleChannelReader(task.Stream);
 			double sample = reader.ReadSingleSample();
 			return sample;
 		}
 
-		private static double ReadCurrent(Task task) {
-			AnalogSingleChannelReader reader = new AnalogSingleChannelReader(task.Stream);
-			double sample = reader.ReadSingleSample();
-			return sample;
-		}
-
-		public static byte ReadData(Task task) {
+		public static byte ReadDigital(Task task) {
 			DigitalSingleChannelReader reader = new DigitalSingleChannelReader(task.Stream);
 			byte sample = reader.ReadSingleSamplePortByte();
 			return sample;
+		}
+
+		private static void WriteAnalog(Task task, double voltage) {
+			AnalogSingleChannelWriter write = new AnalogSingleChannelWriter(task.Stream);
+			write.BeginWriteSingleSample(true, voltage, null, null);
+		}
+
+		private static void WriteDigital(Task task, byte data) {
+			//Convert byte into bool array
+			bool[] boolData = new bool[sizeof(byte)];
+			for (var i = 0; i < sizeof(byte); i++) {
+				boolData[i] = (data & 1) == 1;
+				data >>= 1;
+			}
+
+			WriteDigital(task, boolData);
+		}
+
+		private static void WriteDigital(Task task, bool[] data) {
+			DigitalSingleChannelWriter write = new DigitalSingleChannelWriter(task.Stream);
+			write.BeginWriteSingleSampleMultiLine(true, data, null, null);
 		}
 
 		public static void Dispose() {

@@ -15,8 +15,8 @@ namespace ShootingRange {
 		}
 
 		private void Readvolt_Click(object sender, EventArgs e) {
+			NIController.SetMotorControl(NIController.GetMotorLoad());
 			listView1.Items.Clear();
-			listView1.Items.Add(new ListViewItem(NIController.GetMotorLoad() + ""));
 			listView1.Items.Add(new ListViewItem(NIController.GetRotations() + ""));
 		}
 	}
