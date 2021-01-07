@@ -11,15 +11,28 @@ using System.Windows.Forms;
 namespace ShootingRange
 {
 	public partial class Form1 : Form {
+		private static Image GREEN_BUTTON = global::ShootingRange.Properties.Resources.green_light, RED_BUTTON = global::ShootingRange.Properties.Resources.red_light; // Preinitialize images to remove memory leak
+
 		public byte dist, currDist;
 		public bool fast;
+		public bool stuck = false;
+		private bool oldStuck = true; //!stuck
+
 		public Form1() {
 			InitializeComponent();
 			progressBar1.Maximum = 90*15;
 			dist = 0;
 		}
 
-		private void button1_Click(object sender, EventArgs e) {
+		public void UpdateForm() {
+			if (stuck == oldStuck) return;
+			oldStuck = stuck;
+
+			if (!stuck) stuckSymbol.Image = GREEN_BUTTON;
+			if (stuck) stuckSymbol.Image = RED_BUTTON;
+		}
+
+		private void distBtn_Click(object sender, EventArgs e) {
 			currDist = dist; //Todo: currDist needs to equal readings
 			progressBar1.Value = currDist*15; //Todo: This should constantly update
 			//Todo: Send signal to motor, compare currDist to dist
@@ -111,13 +124,15 @@ namespace ShootingRange
 			this.label3.Text = dist + "";
 		}
 
-		private void label3_Click(object sender, EventArgs e) {
-
-		}
 
 		private void trackBar1_Scroll(object sender, EventArgs e) {
 
 		}
+
+		private void stuckbtn_Click(object sender, EventArgs e) {
+			stuck = !stuck;
+		}
+
 
 		private void Form1_Load(object sender, EventArgs e) {
 
