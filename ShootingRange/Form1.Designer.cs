@@ -1,7 +1,5 @@
-﻿namespace ShootingRange
-{
-	partial class Form1
-	{
+﻿namespace ShootingRange {
+	partial class Form1 {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>

@@ -6,10 +6,8 @@ using System.Windows.Forms;
 using NationalInstruments.DAQmx;
 using Ivi.Visa;
 
-namespace ShootingRange
-{
-	static class Program
-	{
+namespace ShootingRange {
+	static class Program {
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
