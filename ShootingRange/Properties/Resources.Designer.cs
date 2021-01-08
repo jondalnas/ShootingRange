@@ -63,6 +63,26 @@ namespace ShootingRange.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Down_arrow {
+            get {
+                object obj = ResourceManager.GetObject("Down arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Down_arrow_lit {
+            get {
+                object obj = ResourceManager.GetObject("Down arrow lit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap green_light {
             get {
                 object obj = ResourceManager.GetObject("green light", resourceCulture);
@@ -76,6 +96,46 @@ namespace ShootingRange.Properties {
         internal static System.Drawing.Bitmap red_light {
             get {
                 object obj = ResourceManager.GetObject("red light", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap standstill {
+            get {
+                object obj = ResourceManager.GetObject("standstill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap standstill_lit {
+            get {
+                object obj = ResourceManager.GetObject("standstill lit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Up_arrow {
+            get {
+                object obj = ResourceManager.GetObject("Up arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Up_arrow_lit {
+            get {
+                object obj = ResourceManager.GetObject("Up arrow lit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

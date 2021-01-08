@@ -26,7 +26,6 @@
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.distBtn = new System.Windows.Forms.Button();
 			this.btn7 = new System.Windows.Forms.Button();
 			this.btn8 = new System.Windows.Forms.Button();
@@ -47,21 +46,23 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.stuckbtn = new System.Windows.Forms.Button();
+			this.up = new System.Windows.Forms.PictureBox();
+			this.standstill = new System.Windows.Forms.PictureBox();
+			this.down = new System.Windows.Forms.PictureBox();
 			this.stuckSymbol = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.trackBar2 = new System.Windows.Forms.TrackBar();
+			this.targetPosBar1 = new ShootingRange.TargetPosBar();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.up)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.standstill)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.down)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.stuckSymbol)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// progressBar1
-			// 
-			this.progressBar1.Location = new System.Drawing.Point(12, 415);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(776, 23);
-			this.progressBar1.TabIndex = 0;
 			// 
 			// distBtn
 			// 
@@ -207,7 +208,7 @@
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label3.Location = new System.Drawing.Point(298, 9);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(225, 395);
+			this.label3.Size = new System.Drawing.Size(293, 395);
 			this.label3.TabIndex = 16;
 			this.label3.Text = "0";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -245,29 +246,56 @@
 			// label6
 			// 
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(597, 146);
+			this.label6.Location = new System.Drawing.Point(686, 190);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(185, 23);
+			this.label6.Size = new System.Drawing.Size(102, 32);
 			this.label6.TabIndex = 24;
-			this.label6.Text = "Stuck";
+			this.label6.Text = "Current running status:";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// stuckbtn
 			// 
-			this.stuckbtn.Location = new System.Drawing.Point(657, 87);
+			this.stuckbtn.Location = new System.Drawing.Point(686, 143);
 			this.stuckbtn.Name = "stuckbtn";
-			this.stuckbtn.Size = new System.Drawing.Size(75, 23);
+			this.stuckbtn.Size = new System.Drawing.Size(102, 23);
 			this.stuckbtn.TabIndex = 25;
 			this.stuckbtn.Text = "button1";
 			this.stuckbtn.UseVisualStyleBackColor = true;
 			this.stuckbtn.Click += new System.EventHandler(this.stuckbtn_Click);
 			// 
+			// up
+			// 
+			this.up.Location = new System.Drawing.Point(549, 66);
+			this.up.Name = "up";
+			this.up.Size = new System.Drawing.Size(100, 100);
+			this.up.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.up.TabIndex = 28;
+			this.up.TabStop = false;
+			// 
+			// standstill
+			// 
+			this.standstill.Location = new System.Drawing.Point(549, 172);
+			this.standstill.Name = "standstill";
+			this.standstill.Size = new System.Drawing.Size(100, 100);
+			this.standstill.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.standstill.TabIndex = 27;
+			this.standstill.TabStop = false;
+			// 
+			// down
+			// 
+			this.down.Location = new System.Drawing.Point(549, 278);
+			this.down.Name = "down";
+			this.down.Size = new System.Drawing.Size(100, 100);
+			this.down.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.down.TabIndex = 26;
+			this.down.TabStop = false;
+			// 
 			// stuckSymbol
 			// 
 			this.stuckSymbol.Cursor = System.Windows.Forms.Cursors.Default;
-			this.stuckSymbol.Location = new System.Drawing.Point(598, 172);
+			this.stuckSymbol.Location = new System.Drawing.Point(686, 226);
 			this.stuckSymbol.Name = "stuckSymbol";
-			this.stuckSymbol.Size = new System.Drawing.Size(184, 178);
+			this.stuckSymbol.Size = new System.Drawing.Size(102, 124);
 			this.stuckSymbol.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.stuckSymbol.TabIndex = 23;
 			this.stuckSymbol.TabStop = false;
@@ -292,11 +320,35 @@
 			this.pictureBox1.TabIndex = 19;
 			this.pictureBox1.TabStop = false;
 			// 
+			// trackBar2
+			// 
+			this.trackBar2.LargeChange = 1;
+			this.trackBar2.Location = new System.Drawing.Point(368, 305);
+			this.trackBar2.Minimum = 1;
+			this.trackBar2.Name = "trackBar2";
+			this.trackBar2.Size = new System.Drawing.Size(104, 45);
+			this.trackBar2.TabIndex = 30;
+			this.trackBar2.Value = 1;
+			this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+			// 
+			// targetPosBar1
+			// 
+			this.targetPosBar1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.targetPosBar1.Location = new System.Drawing.Point(12, 415);
+			this.targetPosBar1.Name = "targetPosBar1";
+			this.targetPosBar1.Size = new System.Drawing.Size(776, 23);
+			this.targetPosBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			this.targetPosBar1.TabIndex = 29;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.trackBar2);
+			this.Controls.Add(this.up);
+			this.Controls.Add(this.standstill);
+			this.Controls.Add(this.down);
 			this.Controls.Add(this.stuckbtn);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.stuckSymbol);
@@ -320,22 +372,24 @@
 			this.Controls.Add(this.btn8);
 			this.Controls.Add(this.btn7);
 			this.Controls.Add(this.distBtn);
-			this.Controls.Add(this.progressBar1);
+			this.Controls.Add(this.targetPosBar1);
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "Shooting Range Controller";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.up)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.standstill)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.down)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.stuckSymbol)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.Button distBtn;
 		private System.Windows.Forms.Button btn7;
 		private System.Windows.Forms.Button btn8;
@@ -359,6 +413,11 @@
 		private System.Windows.Forms.PictureBox stuckSymbol;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Button stuckbtn;
+		private System.Windows.Forms.PictureBox down;
+		private System.Windows.Forms.PictureBox standstill;
+		private System.Windows.Forms.PictureBox up;
+		private TargetPosBar targetPosBar1;
+		private System.Windows.Forms.TrackBar trackBar2;
 	}
 }
 
