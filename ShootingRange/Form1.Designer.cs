@@ -54,6 +54,7 @@
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.trackBar2 = new System.Windows.Forms.TrackBar();
 			this.targetPosBar1 = new ShootingRange.TargetPosBar();
+			this.label7 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.up)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.standstill)).BeginInit();
@@ -208,7 +209,7 @@
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label3.Location = new System.Drawing.Point(298, 9);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(293, 395);
+			this.label3.Size = new System.Drawing.Size(245, 395);
 			this.label3.TabIndex = 16;
 			this.label3.Text = "0";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -340,11 +341,21 @@
 			this.targetPosBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			this.targetPosBar1.TabIndex = 29;
 			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(549, 40);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(100, 23);
+			this.label7.TabIndex = 31;
+			this.label7.Text = "Current direction";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.label7);
 			this.Controls.Add(this.trackBar2);
 			this.Controls.Add(this.up);
 			this.Controls.Add(this.standstill);
@@ -418,6 +429,6 @@
 		private System.Windows.Forms.PictureBox up;
 		private TargetPosBar targetPosBar1;
 		private System.Windows.Forms.TrackBar trackBar2;
+		private System.Windows.Forms.Label label7;
 	}
 }
-

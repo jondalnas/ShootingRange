@@ -23,7 +23,7 @@ namespace ShootingRange
 
 		public Form1() {
 			InitializeComponent();
-			targetPosBar1.Maximum = 90*15;
+			targetPosBar1.Maximum = 90;
 			dist = 0;
 		}
 
@@ -62,7 +62,7 @@ namespace ShootingRange
 
 		private void distBtn_Click(object sender, EventArgs e) {
 			currDist = dist; //Todo: currDist needs to equal readings
-			targetPosBar1.Value = currDist*15; //Todo: This should constantly update
+			targetPosBar1.Value = currDist; //Todo: This should constantly update
 			//Todo: Send signal to motor, compare currDist to dist
 			dist = 0;
 		}
