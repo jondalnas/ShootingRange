@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace ShootingRange
 {
@@ -25,6 +26,45 @@ namespace ShootingRange
 			InitializeComponent();
 			targetPosBar1.Maximum = 90;
 			dist = 0;
+			this.KeyPreview = true;
+			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+
+		}
+
+		public void Form1_KeyDown(object sender, KeyEventArgs e) {
+			if (e.KeyCode == Keys.D0) {
+				btn0.PerformClick();
+			}
+			if (e.KeyCode == Keys.D1) {
+				btn1.PerformClick();
+			}
+			if (e.KeyCode == Keys.D2) {
+				btn2.PerformClick();
+			}
+			if (e.KeyCode == Keys.D3) {
+				btn3.PerformClick();
+			}
+			if (e.KeyCode == Keys.D4) {
+				btn4.PerformClick();
+			}
+			if (e.KeyCode == Keys.D5) {
+				btn5.PerformClick();
+			}
+			if (e.KeyCode == Keys.D6) {
+				btn6.PerformClick();
+			}
+			if (e.KeyCode == Keys.D7) {
+				btn7.PerformClick();
+			}
+			if (e.KeyCode == Keys.D8) {
+				btn8.PerformClick();
+			}
+			if (e.KeyCode == Keys.D9) {
+				btn9.PerformClick();
+			}
+			if (e.KeyCode == Keys.Back) {
+				delBtn.PerformClick();
+			}
 		}
 
 		public void UpdateForm() {
