@@ -18,7 +18,7 @@ namespace ShootingRange {
 
 		public static void Update() {
 			distance = NIController.GetRotations();
-			stuck = NIController.IsStuck();
+			if (NIController.IsStuck()) stuck = true;
 
 			NIController.SetMotorControl(CalculateVrefVoltage());
 		}
@@ -43,6 +43,14 @@ namespace ShootingRange {
 
 		public static bool IsStuck() {
 			return stuck;
+		}
+
+		public static void SetStuck() {
+			stuck = true;
+		}
+
+		public static void ResetStuck() {
+			stuck = false;
 		}
 
 		private static float CalculateVrefVoltage() {

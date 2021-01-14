@@ -14,7 +14,6 @@ namespace ShootingRange {
 
 		public byte dist;
 		public bool fast;
-		public bool stuck = false;
 		private bool oldStuck = true; //!stuck
 		private sbyte oldDir = 1; //Set to not zero, so graphic updates on startup
 		public bool warning;
@@ -72,11 +71,14 @@ namespace ShootingRange {
 		public void ChangeWarning() {
 			SetWarningLabelCallBack l = new SetWarningLabelCallBack(SetWarning);
 			Invoke(l);
-			warning = !warning;
 		}
 
 		private void SetWarning() {
-			warning_label.Visible = warning;
+			bool stuck = Controller.IsStuck();
+			warning_label.Visible = stuck;
+
+			if (stuck) stuckbtn.Text = "Reset stuck";
+			else stuckbtn.Text = "Emergency stop";
 		}
 
 		delegate void SetTargetPosBarValue(byte pos);
@@ -123,16 +125,15 @@ namespace ShootingRange {
 			BeginInvoke(tp, Controller.GetDistance());
 
 			//Check if motor is stuck and update Form accordingly
-			if (Controller.IsStuck()) stuck = true;
+			bool stuck = Controller.IsStuck();
 			if (stuck == oldStuck) return;
 			oldStuck = stuck;
 
-			if (!stuck) {
-				stuckSymbol.Image = GREEN_LIGHT;
-				ChangeWarning();
-			}
 			if (stuck) {
 				stuckSymbol.Image = RED_LIGHT;
+				ChangeWarning();
+			} else {
+				stuckSymbol.Image = GREEN_LIGHT;
 				ChangeWarning();
 			}
 		}
@@ -244,7 +245,8 @@ namespace ShootingRange {
 		}
 
 		private void stuckbtn_Click(object sender, EventArgs e) {
-			stuck = !stuck;
+			if (Controller.IsStuck()) Controller.ResetStuck();
+			else Controller.SetStuck();
 		}
 
 
