@@ -11,7 +11,7 @@ namespace ShootingRange {
 		private static NationalInstruments.DAQmx.Task motorRotationsTask;
 		private static AIChannel motorLoadChannel;
 		private static AOChannel motorControlChannel;
-		private static DOChannel motorRotationsChannel;
+		private static DIChannel motorRotationsChannel;
 
 		public static void InitializeInstrument() {
 			//Initializing Task
@@ -27,7 +27,7 @@ namespace ShootingRange {
 			motorControlChannel = motorControlTask.AOChannels.CreateVoltageChannel("dev1/ao0", "Motor Control Channel", 0, 5, AOVoltageUnits.Volts);
 
 			//Voltage digital in
-			motorRotationsChannel = motorRotationsTask.DOChannels.CreateChannel("dev1/port0", "Motor Rotation Channel", ChannelLineGrouping.OneChannelForAllLines);
+			motorRotationsChannel = motorRotationsTask.DIChannels.CreateChannel("dev1/port0", "Motor Rotation Channel", ChannelLineGrouping.OneChannelForAllLines);
 		}
 
 		public static void SetMotorControl(double voltage) {
@@ -45,7 +45,7 @@ namespace ShootingRange {
 			return (byte) (ReadDigital(motorRotationsTask) & 0b1111111);
 		}
 
-		public static bool Stuck() {
+		public static bool IsStuck() {
 			return (ReadDigital(motorRotationsTask) >> 7 & 1) == 1;
 		}
 

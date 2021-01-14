@@ -14,9 +14,11 @@ namespace ShootingRange {
 		private static byte distance;
 		private static byte targetDistance;
 		private static byte speed;
+		private static bool stuck;
 
 		public static void Update() {
 			distance = NIController.GetRotations();
+			stuck = NIController.IsStuck();
 
 			NIController.SetMotorControl(CalculateVrefVoltage());
 		}
@@ -39,7 +41,13 @@ namespace ShootingRange {
 			return distance;
 		}
 
+		public static bool IsStuck() {
+			return stuck;
+		}
+
 		private static float CalculateVrefVoltage() {
+			if (stuck) return MAX_SPEED_VOLTAGE; //If stuck, then stop motor
+
 			//direction * (speed in %) * (max voltage / 2) + (max voltage / 2)
 			return 1.0f * GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE;
 		}

@@ -109,7 +109,7 @@ namespace ShootingRange {
 			targetPosBar1.Value = Controller.GetDistance();
 
 			//Check if motor is stuck and update Form accordingly
-			//TODO: Update this, when we can read a stuck signal
+			if (Controller.IsStuck()) stuck = true;
 			if (stuck == oldStuck) return;
 			oldStuck = stuck;
 
