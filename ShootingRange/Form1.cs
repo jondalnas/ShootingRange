@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ShootingRange {
 	public partial class Form1 : Form {
-		private static Image GREEN_LIGHT = global::ShootingRange.Properties.Resources.green_light, RED_LIGHT = global::ShootingRange.Properties.Resources.red_light, DOWN_ARROW = global::ShootingRange.Properties.Resources.Down_arrow, DOWN_ARROW_LIT = global::ShootingRange.Properties.Resources.Down_arrow_lit, UP_ARROW = global::ShootingRange.Properties.Resources.Up_arrow, UP_ARROW_LIT = global::ShootingRange.Properties.Resources.Up_arrow_lit, STANDSTIL = global::ShootingRange.Properties.Resources.standstill, STANDSTIL_LIT = global::ShootingRange.Properties.Resources.standstill_lit; // Preinitialize images to remove memory leak
+		private static Image GREEN_LIGHT = global::ShootingRange.Properties.Resources.green_light, RED_LIGHT = global::ShootingRange.Properties.Resources.red_light, DOWN_ARROW = global::ShootingRange.Properties.Resources.Down_arrow, DOWN_ARROW_LIT = global::ShootingRange.Properties.Resources.Down_arrow_lit, UP_ARROW = global::ShootingRange.Properties.Resources.Up_arrow, UP_ARROW_LIT = global::ShootingRange.Properties.Resources.Up_arrow_lit, STANDSTILL = global::ShootingRange.Properties.Resources.standstill, STANDSTILL_LIT = global::ShootingRange.Properties.Resources.standstill_lit; // Preinitialize images to remove memory leak
 
 		public byte dist;
 		public bool fast;
@@ -26,6 +26,9 @@ namespace ShootingRange {
 			this.KeyPreview = true;
 			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
 
+			up.Image = UP_ARROW;
+			down.Image = DOWN_ARROW;
+			standstill.Image = STANDSTILL;
 		}
 
 		public void Form1_KeyDown(object sender, KeyEventArgs e) {
@@ -64,10 +67,10 @@ namespace ShootingRange {
 			}
 		}
 
-		delegate void SetLabelCallBack();
+		delegate void SetWarningLabelCallBack();
 
 		public void ChangeWarning() {
-			SetLabelCallBack l = new SetLabelCallBack(SetWarning);
+			SetWarningLabelCallBack l = new SetWarningLabelCallBack(SetWarning);
 			Invoke(l);
 			warning = !warning;
 		}
@@ -76,37 +79,48 @@ namespace ShootingRange {
 			warning_label.Visible = warning;
 		}
 
+		delegate void SetTargetPosBarValue(byte pos);
+
+		private void SetTargetPos(byte pos) {
+			targetPosBar1.Value = pos;
+		}
+
+		delegate void SetDirectionImages(ref Image up, ref Image down, ref Image still);
+
+		private void SetDirection(ref Image up, ref Image down, ref Image still) {
+			this.up.Image = up;
+			this.down.Image = down;
+			standstill.Image = still;
+		}
+
 		public void UpdateForm() {
 			//Update graphic to moving direction
+			SetDirectionImages di = new SetDirectionImages(SetDirection);
 			switch (Controller.GetDirection()) {
 				case -1:
 					if (oldDir == -1) break;
 
 					oldDir = -1; //-1 is backwards
-					up.Image = UP_ARROW;
-					standstill.Image = STANDSTIL;
-					down.Image = DOWN_ARROW_LIT;
+					BeginInvoke(di, UP_ARROW, DOWN_ARROW_LIT, STANDSTILL);
 					break;
 				case 1:
 					if (oldDir == 1) break;
 
 					oldDir = 1; //1 is forwards
-					up.Image = UP_ARROW_LIT;
-					standstill.Image = STANDSTIL;
-					down.Image = DOWN_ARROW;
+					BeginInvoke(di, UP_ARROW_LIT, DOWN_ARROW, STANDSTILL);
 					break;
 				case 0:
 					if (oldDir == 0) break;
 
 					oldDir = 0; //0 is standstil
-					up.Image = UP_ARROW;
-					standstill.Image = STANDSTIL_LIT;
-					down.Image = DOWN_ARROW;
+					BeginInvoke(di, UP_ARROW, DOWN_ARROW, STANDSTILL_LIT);
 					break;
 			}
 
 			//Update current distance to readings from Controller
-			targetPosBar1.Value = Controller.GetDistance();
+			SetTargetPosBarValue tp = new SetTargetPosBarValue(SetTargetPos);
+			
+			BeginInvoke(tp, Controller.GetDistance());
 
 			//Check if motor is stuck and update Form accordingly
 			if (Controller.IsStuck()) stuck = true;

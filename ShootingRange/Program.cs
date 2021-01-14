@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace ShootingRange {
 	static class Program {
 		static private Form1 mainForm;
+		private static bool running = true;
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -22,17 +23,20 @@ namespace ShootingRange {
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			mainForm = new Form1();
-			Task thread = new Task(Update);
-			thread.Start();
-
+			Task.Factory.StartNew(Update);
+			
 			Application.Run(mainForm);
 		}
 
 		private static void Update() {
-			while (true) {
+			while (running) {
 				mainForm.UpdateForm();
 				Controller.Update();
 			}
+		}
+
+		public static void Dispose() {
+			running = false;
 		}
 	}
 }
