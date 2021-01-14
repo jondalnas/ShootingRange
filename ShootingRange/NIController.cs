@@ -76,6 +76,8 @@ namespace ShootingRange {
 		}
 
 		public static void Dispose() {
+			if (motorControlChannel == null) return;
+
 			motorControlChannel.Dispose();
 			motorLoadChannel.Dispose();
 			motorRotationsChannel.Dispose();
