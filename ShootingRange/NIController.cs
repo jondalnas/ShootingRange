@@ -38,8 +38,15 @@ namespace ShootingRange {
 			return ReadAnalog(motorLoadTask);
 		}
 
+		//Digital signal is SRRRRRRR
+		//S is stuck bit
+		//R is distance
 		public static byte GetRotations() {
 			return (byte) (ReadDigital(motorRotationsTask) & 0b1111111);
+		}
+
+		public static bool Stuck() {
+			return (ReadDigital(motorRotationsTask) >> 7 & 1) == 1;
 		}
 
 		private static double ReadAnalog(Task task) {

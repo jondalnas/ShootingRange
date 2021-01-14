@@ -40,6 +40,7 @@ namespace ShootingRange {
 		}
 
 		private static float CalculateVrefVoltage() {
+			//direction * (speed in %) * (max voltage / 2) + (max voltage / 2)
 			return 1.0f * GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE;
 		}
 

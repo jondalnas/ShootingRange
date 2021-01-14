@@ -16,9 +16,7 @@ namespace ShootingRange {
 		public bool fast;
 		public bool stuck = false;
 		private bool oldStuck = true; //!stuck
-		private const float deadzone = 0.01f;
-		public float direction = 2.5f;
-		public byte oldDir;
+		private sbyte oldDir = 1; //Set to not zero, so graphic updates on startup
 		public bool warning;
 
 		public Form1() {
@@ -80,31 +78,32 @@ namespace ShootingRange {
 
 		public void UpdateForm() {
 			//Update graphic to moving direction
-			//TODO: Update this
-			if (direction < 2.5 - deadzone) {
-				if (oldDir == 0) goto stck;
+			switch (Controller.GetDirection()) {
+				case -1:
+					if (oldDir == -1) break;
 
-				oldDir = 0; //Zero is backwards
-				up.Image = UP_ARROW;
-				standstill.Image = STANDSTIL;
-				down.Image = DOWN_ARROW_LIT;
-			} else if (direction > 2.5 + deadzone) {
-				if (oldDir == 2) goto stck;
+					oldDir = -1; //-1 is backwards
+					up.Image = UP_ARROW;
+					standstill.Image = STANDSTIL;
+					down.Image = DOWN_ARROW_LIT;
+					break;
+				case 1:
+					if (oldDir == 1) break;
 
-				oldDir = 2; //Two is forwards
-				up.Image = UP_ARROW_LIT;
-				standstill.Image = STANDSTIL;
-				down.Image = DOWN_ARROW;
-			} else if(direction < 2.5 + deadzone && direction > 2.5 - deadzone) {
-				if (oldDir == 1) goto stck;
+					oldDir = 1; //1 is forwards
+					up.Image = UP_ARROW_LIT;
+					standstill.Image = STANDSTIL;
+					down.Image = DOWN_ARROW;
+					break;
+				case 0:
+					if (oldDir == 0) break;
 
-				oldDir = 1; //One is standstil
-				up.Image = UP_ARROW;
-				standstill.Image = STANDSTIL_LIT;
-				down.Image = DOWN_ARROW;
+					oldDir = 0; //0 is standstil
+					up.Image = UP_ARROW;
+					standstill.Image = STANDSTIL_LIT;
+					down.Image = DOWN_ARROW;
+					break;
 			}
-
-			stck:
 
 			//Update current distance to readings from Controller
 			targetPosBar1.Value = Controller.GetDistance();
