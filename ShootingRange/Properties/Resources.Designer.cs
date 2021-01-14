@@ -93,6 +93,16 @@ namespace ShootingRange.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Rabbit_symbol {
+            get {
+                object obj = ResourceManager.GetObject("Rabbit symbol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap red_light {
             get {
                 object obj = ResourceManager.GetObject("red light", resourceCulture);
@@ -116,6 +126,16 @@ namespace ShootingRange.Properties {
         internal static System.Drawing.Bitmap standstill_lit {
             get {
                 object obj = ResourceManager.GetObject("standstill lit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Turtle_symbol1 {
+            get {
+                object obj = ResourceManager.GetObject("Turtle symbol1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

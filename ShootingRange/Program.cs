@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ShootingRange {
@@ -13,6 +14,8 @@ namespace ShootingRange {
 		/// </summary>
 		[STAThread]
 		static void Main() {
+			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-us");
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 

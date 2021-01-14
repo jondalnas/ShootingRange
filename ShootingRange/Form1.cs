@@ -21,6 +21,7 @@ namespace ShootingRange
 		private const float deadzone = 0.01f;
 		public float direction = 2.5f;
 		public byte oldDir;
+		public bool warning;
 
 		public Form1() {
 			InitializeComponent();
@@ -67,6 +68,18 @@ namespace ShootingRange
 			}
 		}
 
+		delegate void SetLabelCallBack();
+
+		public void ChangeWarning() {
+			SetLabelCallBack l = new SetLabelCallBack(SetWarning);
+			Invoke(l);
+			warning = !warning;
+		}
+
+		private void SetWarning() {
+			warning_label.Visible = warning;
+		}
+
 		public void UpdateForm() {
 			if (direction < 2.5 - deadzone) {
 				if (oldDir == 0) goto stck;
@@ -96,8 +109,14 @@ namespace ShootingRange
 			if (stuck == oldStuck) return;
 			oldStuck = stuck;
 
-			if (!stuck) stuckSymbol.Image = GREEN_LIGHT;
-			if (stuck) stuckSymbol.Image = RED_LIGHT;
+			if (!stuck) {
+				stuckSymbol.Image = GREEN_LIGHT;
+				ChangeWarning();
+			}
+			if (stuck) {
+				stuckSymbol.Image = RED_LIGHT;
+				ChangeWarning();
+			}
 		}
 
 		private void distBtn_Click(object sender, EventArgs e) {
@@ -169,6 +188,7 @@ namespace ShootingRange
 			}
 			this.label3.Text = dist + "";
 		}
+
 
 		private void btn2_Click(object sender, EventArgs e) {
 			if (dist > 9) {
