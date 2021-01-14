@@ -45,7 +45,6 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.stuckbtn = new System.Windows.Forms.Button();
-			this.trackBar2 = new System.Windows.Forms.TrackBar();
 			this.label7 = new System.Windows.Forms.Label();
 			this.warning_label = new System.Windows.Forms.Label();
 			this.targetPosBar1 = new ShootingRange.TargetPosBar();
@@ -56,7 +55,6 @@
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.stuckSymbol)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.up)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.standstill)).BeginInit();
@@ -264,17 +262,6 @@
 			this.stuckbtn.UseVisualStyleBackColor = true;
 			this.stuckbtn.Click += new System.EventHandler(this.stuckbtn_Click);
 			// 
-			// trackBar2
-			// 
-			this.trackBar2.LargeChange = 1;
-			this.trackBar2.Location = new System.Drawing.Point(368, 305);
-			this.trackBar2.Minimum = 1;
-			this.trackBar2.Name = "trackBar2";
-			this.trackBar2.Size = new System.Drawing.Size(104, 45);
-			this.trackBar2.TabIndex = 30;
-			this.trackBar2.Value = 1;
-			this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
-			// 
 			// label7
 			// 
 			this.label7.Location = new System.Drawing.Point(549, 40);
@@ -372,7 +359,6 @@
 			this.Controls.Add(this.stuckSymbol);
 			this.Controls.Add(this.warning_label);
 			this.Controls.Add(this.label7);
-			this.Controls.Add(this.trackBar2);
 			this.Controls.Add(this.up);
 			this.Controls.Add(this.standstill);
 			this.Controls.Add(this.down);
@@ -401,7 +387,6 @@
 			this.Text = "Shooting Range Controller";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.stuckSymbol)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.up)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.standstill)).EndInit();
@@ -441,7 +426,6 @@
 		private System.Windows.Forms.PictureBox standstill;
 		private System.Windows.Forms.PictureBox up;
 		private TargetPosBar targetPosBar1;
-		private System.Windows.Forms.TrackBar trackBar2;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label warning_label;
 	}

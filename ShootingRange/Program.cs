@@ -14,7 +14,7 @@ namespace ShootingRange {
 		/// </summary>
 		[STAThread]
 		static void Main() {
-			NIController.InitializeInstrument();
+			Controller.Initialize();
 			
 			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-us");
 
@@ -31,6 +31,7 @@ namespace ShootingRange {
 		private static void Update() {
 			while (true) {
 				mainForm.UpdateForm();
+				Controller.Update();
 			}
 		}
 	}

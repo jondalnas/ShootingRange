@@ -24,7 +24,7 @@ namespace ShootingRange {
 			motorLoadChannel = motorLoadTask.AIChannels.CreateVoltageChannel("dev1/ai0", "Motor Load Channel", AITerminalConfiguration.Rse, 0, 10, AIVoltageUnits.Volts);
 
 			//Voltage analog out
-			motorControlChannel = motorControlTask.AOChannels.CreateVoltageChannel("dev1/ao0", "Motor Control Channel", -10, 10, AOVoltageUnits.Volts);
+			motorControlChannel = motorControlTask.AOChannels.CreateVoltageChannel("dev1/ao0", "Motor Control Channel", 0, 5, AOVoltageUnits.Volts);
 
 			//Voltage digital in
 			motorRotationsChannel = motorRotationsTask.DOChannels.CreateChannel("dev1/port0", "Motor Rotation Channel", ChannelLineGrouping.OneChannelForAllLines);
@@ -39,7 +39,7 @@ namespace ShootingRange {
 		}
 
 		public static byte GetRotations() {
-			return ReadDigital(motorRotationsTask);
+			return (byte) (ReadDigital(motorRotationsTask) & 0b1111111);
 		}
 
 		private static double ReadAnalog(Task task) {

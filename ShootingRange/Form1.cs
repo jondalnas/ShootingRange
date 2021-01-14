@@ -12,7 +12,7 @@ namespace ShootingRange {
 	public partial class Form1 : Form {
 		private static Image GREEN_LIGHT = global::ShootingRange.Properties.Resources.green_light, RED_LIGHT = global::ShootingRange.Properties.Resources.red_light, DOWN_ARROW = global::ShootingRange.Properties.Resources.Down_arrow, DOWN_ARROW_LIT = global::ShootingRange.Properties.Resources.Down_arrow_lit, UP_ARROW = global::ShootingRange.Properties.Resources.Up_arrow, UP_ARROW_LIT = global::ShootingRange.Properties.Resources.Up_arrow_lit, STANDSTIL = global::ShootingRange.Properties.Resources.standstill, STANDSTIL_LIT = global::ShootingRange.Properties.Resources.standstill_lit; // Preinitialize images to remove memory leak
 
-		public byte dist, currDist;
+		public byte dist;
 		public bool fast;
 		public bool stuck = false;
 		private bool oldStuck = true; //!stuck
@@ -79,6 +79,8 @@ namespace ShootingRange {
 		}
 
 		public void UpdateForm() {
+			//Update graphic to moving direction
+			//TODO: Update this
 			if (direction < 2.5 - deadzone) {
 				if (oldDir == 0) goto stck;
 
@@ -104,6 +106,11 @@ namespace ShootingRange {
 
 			stck:
 
+			//Update current distance to readings from Controller
+			targetPosBar1.Value = Controller.GetDistance();
+
+			//Check if motor is stuck and update Form accordingly
+			//TODO: Update this, when we can read a stuck signal
 			if (stuck == oldStuck) return;
 			oldStuck = stuck;
 
@@ -118,9 +125,7 @@ namespace ShootingRange {
 		}
 
 		private void distBtn_Click(object sender, EventArgs e) {
-			currDist = dist; //Todo: currDist needs to equal readings
-			targetPosBar1.Value = currDist; //Todo: This should constantly update
-			//Todo: Send signal to motor, compare currDist to dist
+			Controller.SetTargetDistance(dist);
 			dist = 0;
 		}
 
@@ -222,11 +227,7 @@ namespace ShootingRange {
 
 
 		private void trackBar1_Scroll(object sender, EventArgs e) {
-
-		}
-
-		private void trackBar2_Scroll(object sender, EventArgs e) {
-			direction = trackBar2.Value/2;
+			Controller.SetSpeed((byte) trackBar1.Value);
 		}
 
 		private void stuckbtn_Click(object sender, EventArgs e) {
