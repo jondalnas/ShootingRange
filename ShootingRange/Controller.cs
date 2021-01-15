@@ -12,6 +12,7 @@ namespace ShootingRange {
 		public static float MAX_SPEED_VOLTAGE = 5.0f / 2;
 
 		private static byte distance;
+		private static byte initDist;
 		private static byte targetDistance;
 		private static byte speed;
 		private static bool stuck;
@@ -32,13 +33,13 @@ namespace ShootingRange {
 		}
 
 		public static sbyte GetDirection() {
-			if (distance == targetDistance) return 0;		//If distance is at target, then don't move
-			else if (distance < targetDistance) return 1;	//If distance is less than target, then move forward (1)
+			if (GetDistance() == targetDistance) return 0;		//If distance is at target, then don't move
+			else if (GetDistance() < targetDistance) return 1;	//If distance is less than target, then move forward (1)
 			else return -1;									//If distance is greater than target, then move backwards (-1)
 		}
 
 		public static byte GetDistance() {
-			return distance;
+			return (byte) ((distance - initDist) & 0x7f);
 		}
 
 		public static bool IsStuck() {
@@ -62,6 +63,12 @@ namespace ShootingRange {
 
 		public static void Initialize() {
 			NIController.InitializeInstrument();
+
+			initDist = NIController.GetRotations();
+		}
+
+		public static void Dispose() {
+			NIController.SetMotorControl(MAX_SPEED_VOLTAGE);
 		}
 	}
 }

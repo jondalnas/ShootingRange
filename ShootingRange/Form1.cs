@@ -84,6 +84,8 @@ namespace ShootingRange {
 		delegate void SetTargetPosBarValue(byte pos);
 
 		private void SetTargetPos(byte pos) {
+			if (pos > targetPosBar1.Maximum) pos = (byte)targetPosBar1.Maximum;
+
 			targetPosBar1.Value = pos;
 		}
 
