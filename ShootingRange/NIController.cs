@@ -13,6 +13,8 @@ namespace ShootingRange {
 		private static AOChannel motorControlChannel;
 		private static DIChannel motorRotationsChannel;
 
+		private static bool disposed = false;
+
 		public static void InitializeInstrument() {
 			//Initializing Task
 			motorLoadTask = new Task();
@@ -50,23 +52,31 @@ namespace ShootingRange {
 		}
 
 		private static double ReadAnalog(Task task) {
+			if (disposed) return 0;
+
 			AnalogSingleChannelReader reader = new AnalogSingleChannelReader(task.Stream);
 			double sample = reader.ReadSingleSample();
 			return sample;
 		}
 
 		public static byte ReadDigital(Task task) {
+			if (disposed) return 0;
+
 			DigitalSingleChannelReader reader = new DigitalSingleChannelReader(task.Stream);
 			byte sample = reader.ReadSingleSamplePortByte();
 			return sample;
 		}
 
 		private static void WriteAnalog(Task task, double voltage) {
+			if (disposed) return;
+
 			AnalogSingleChannelWriter write = new AnalogSingleChannelWriter(task.Stream);
 			write.BeginWriteSingleSample(true, voltage, null, null);
 		}
 
 		private static void WriteDigital(Task task, byte data) {
+			if (disposed) return;
+
 			//Convert byte into bool array
 			bool[] boolData = new bool[sizeof(byte)];
 			for (var i = 0; i < sizeof(byte); i++) {
@@ -78,6 +88,8 @@ namespace ShootingRange {
 		}
 
 		private static void WriteDigital(Task task, bool[] data) {
+			if (disposed) return;
+
 			DigitalSingleChannelWriter write = new DigitalSingleChannelWriter(task.Stream);
 			write.BeginWriteSingleSampleMultiLine(true, data, null, null);
 		}
@@ -91,6 +103,8 @@ namespace ShootingRange {
 			motorControlTask.Dispose();
 			motorLoadTask.Dispose();
 			motorRotationsTask.Dispose();
+
+			disposed = true;
 		}
 	}
 }

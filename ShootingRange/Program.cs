@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace ShootingRange {
 	static class Program {
 		static private Form1 mainForm;
-		private static bool running = true;
+		private static bool running = true, updateStart = false;
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -23,8 +23,9 @@ namespace ShootingRange {
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			mainForm = new Form1();
-			Task.Factory.StartNew(Update);
-			
+
+			Application.Idle += delegate{ if (updateStart) return; Task.Factory.StartNew(Update); updateStart = true; }; //Run update on different thread, when Form is done loading
+
 			Application.Run(mainForm);
 		}
 
