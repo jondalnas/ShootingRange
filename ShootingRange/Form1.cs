@@ -143,104 +143,71 @@ namespace ShootingRange {
 		private void distBtn_Click(object sender, EventArgs e) {
 			Controller.SetTargetDistance(dist);
 			dist = 0;
+
+			distBtn.Text = "Retrieve target";
 		}
 
 		private void btn7_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 7);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(7);
 		}
 
 		private void btn8_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 8);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(8);
 		}
 
 		private void btn9_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 9);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(9);
 		}
 
 		private void btn4_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 4);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(4);
 		}
 
 		private void btn5_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 5);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(5);
 		}
 
 		private void btn6_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 6);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(6);
 		}
 
 		private void btn3_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 3);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(3);
 		}
 
 
 		private void btn2_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 2);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(2);
 		}
 
 		private void btn1_Click(object sender, EventArgs e) {
-			if (dist > 9) {
-				dist = 90;
-			} else {
-				dist = (byte)(dist * 10 + 1);
-			}
-			this.label3.Text = dist + "";
+			AddNumber(1);
 		}
 
 		private void btn0_Click(object sender, EventArgs e) {
+			AddNumber(0);
+		}
+
+		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+		private void AddNumber(byte num) {
 			if (dist > 9) {
 				dist = 90;
 			} else {
-				dist = (byte)(dist * 10);
+				dist = (byte)(dist * 10 + num);
 			}
 			this.label3.Text = dist + "";
+
+			if (dist != 0) distBtn.Text = "Go to distance";
+			else distBtn.Text = "Retrieve target";
 		}
 
 		private void delBtn_Click(object sender, EventArgs e) {
 			dist = (byte) (dist / 10);
 			this.label3.Text = dist + "";
-		}
 
+			if (dist != 0) distBtn.Text = "Go to distance";
+			else distBtn.Text = "Retrieve target";
+		}
 
 		private void trackBar1_Scroll(object sender, EventArgs e) {
 			Controller.SetSpeed((byte) trackBar1.Value);

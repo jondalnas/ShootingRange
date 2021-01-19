@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace ShootingRange {
 	class Controller {
-		public static byte MAX_SPEED = 100;
-		public static float MAX_SPEED_VOLTAGE = 5.0f / 2;
+		private static byte MAX_SPEED = 100;
+		private static float CENTER_VOLTAGE = 2.2f;
+		private static float MIN_SPEED_VOLTAGE = 0.925f;
+		private static float MAX_SPEED_VOLTAGE = 3.992f;
+		private static float MIN_SPEED_VOLTAGE_CENTERED = CENTER_VOLTAGE - MIN_SPEED_VOLTAGE;
+		private static float MAX_SPEED_VOLTAGE_CENTERED = MAX_SPEED_VOLTAGE - CENTER_VOLTAGE;
+
 
 		private static byte distance;
 		private static byte initDist;
@@ -57,12 +62,12 @@ namespace ShootingRange {
 		}
 
 		private static float CalculateVrefVoltage() {
-			if (stuck) return MAX_SPEED_VOLTAGE; //If stuck, then stop motor
-
-			Debug.WriteLine((float)GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE);
+			if (stuck) return CENTER_VOLTAGE; //If stuck, then stop motor
 
 			//direction * (speed in %) * (max voltage / 2) + (max voltage / 2)
-			return (float)GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE;
+			if (GetDirection() > 0) return (float)GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE_CENTERED + CENTER_VOLTAGE;
+			if (GetDirection() < 0) return (float)GetDirection() * speed / MAX_SPEED * MIN_SPEED_VOLTAGE_CENTERED + CENTER_VOLTAGE;
+			return CENTER_VOLTAGE;
 		}
 
 		public static void Initialize() {
