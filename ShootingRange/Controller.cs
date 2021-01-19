@@ -11,9 +11,14 @@ namespace ShootingRange {
 	class Controller {
 		private static byte MAX_SPEED = 100;
 		private static float CENTER_VOLTAGE = 2.2f;
+<<<<<<< HEAD
 		//CAP AT 70%
 		private static float MIN_SPEED_VOLTAGE = 0.925f + 0.5f;//0.925f;
 		private static float MAX_SPEED_VOLTAGE = 3.992f - 0.75f;//3.992f;
+=======
+		private static float MIN_SPEED_VOLTAGE = 0.925f;
+		private static float MAX_SPEED_VOLTAGE = 3.992f;
+>>>>>>> 5e443ad146767732a689a971a760d8a06faf3648
 		private static float MIN_SPEED_VOLTAGE_CENTERED = CENTER_VOLTAGE - MIN_SPEED_VOLTAGE;
 		private static float MAX_SPEED_VOLTAGE_CENTERED = MAX_SPEED_VOLTAGE - CENTER_VOLTAGE;
 
