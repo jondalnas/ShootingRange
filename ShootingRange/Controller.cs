@@ -59,6 +59,8 @@ namespace ShootingRange {
 		private static float CalculateVrefVoltage() {
 			if (stuck) return MAX_SPEED_VOLTAGE; //If stuck, then stop motor
 
+			Debug.WriteLine((float)GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE);
+
 			//direction * (speed in %) * (max voltage / 2) + (max voltage / 2)
 			return (float)GetDirection() * speed / MAX_SPEED * MAX_SPEED_VOLTAGE + MAX_SPEED_VOLTAGE;
 		}
