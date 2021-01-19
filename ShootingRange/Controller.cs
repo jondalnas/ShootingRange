@@ -11,8 +11,9 @@ namespace ShootingRange {
 	class Controller {
 		private static byte MAX_SPEED = 100;
 		private static float CENTER_VOLTAGE = 2.2f;
-		private static float MIN_SPEED_VOLTAGE = 0.925f;
-		private static float MAX_SPEED_VOLTAGE = 3.992f;
+		//CAP AT 70%
+		private static float MIN_SPEED_VOLTAGE = 0.925f + 0.5f;//0.925f;
+		private static float MAX_SPEED_VOLTAGE = 3.992f - 0.75f;//3.992f;
 		private static float MIN_SPEED_VOLTAGE_CENTERED = CENTER_VOLTAGE - MIN_SPEED_VOLTAGE;
 		private static float MAX_SPEED_VOLTAGE_CENTERED = MAX_SPEED_VOLTAGE - CENTER_VOLTAGE;
 
@@ -46,7 +47,7 @@ namespace ShootingRange {
 		}
 
 		public static byte GetDistance() {
-			return (byte) ((distance - initDist) & 0x7f);
+			return (byte)((distance - initDist) & 0x7f);
 		}
 
 		public static bool IsStuck() {
