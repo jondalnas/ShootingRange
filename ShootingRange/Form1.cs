@@ -22,8 +22,10 @@ namespace ShootingRange {
 			InitializeComponent();
 			targetPosBar1.Maximum = 90;
 			dist = 0;
+			this.AcceptButton = distBtn;
 			this.KeyPreview = true;
 			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+			//this.KeyPress += new KeyPressEventHandler(Form1_KeyDown);
 
 			up.Image = UP_ARROW;
 			down.Image = DOWN_ARROW;
@@ -63,6 +65,9 @@ namespace ShootingRange {
 			}
 			if (e.KeyCode == Keys.Back) {
 				delBtn.PerformClick();
+			}
+			if (e.KeyCode == Keys.Space) {
+				distBtn.PerformClick();
 			}
 		}
 
@@ -145,6 +150,7 @@ namespace ShootingRange {
 			dist = 0;
 
 			distBtn.Text = "Retrieve target";
+			distBtn.Focus();
 		}
 
 		private void btn7_Click(object sender, EventArgs e) {
@@ -199,6 +205,8 @@ namespace ShootingRange {
 
 			if (dist != 0) distBtn.Text = "Go to distance";
 			else distBtn.Text = "Retrieve target";
+
+			distBtn.Focus();
 		}
 
 		private void delBtn_Click(object sender, EventArgs e) {
@@ -207,6 +215,8 @@ namespace ShootingRange {
 
 			if (dist != 0) distBtn.Text = "Go to distance";
 			else distBtn.Text = "Retrieve target";
+
+			distBtn.Focus();
 		}
 
 		private void trackBar1_Scroll(object sender, EventArgs e) {
@@ -216,6 +226,8 @@ namespace ShootingRange {
 		private void stuckbtn_Click(object sender, EventArgs e) {
 			if (Controller.IsStuck()) Controller.ResetStuck();
 			else Controller.SetStuck();
+
+			distBtn.Focus();
 		}
 
 
